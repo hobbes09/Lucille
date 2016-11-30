@@ -7,12 +7,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-@Path("/api")
+import com.zinute.lucille.data.ORM;
+
+@Path("api")
 public class GatewayAPI {
-	
+
 	@GET
 	@Path("/v0/{parameter}")
-	public Response responseMsg( @PathParam("parameter") String parameter,
+	public Response responseMsg(@PathParam("parameter") String parameter,
 			@DefaultValue("Nothing to say") @QueryParam("value") String value) {
 
 		String output = "Hello from: " + parameter + " : " + value;
