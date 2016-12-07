@@ -9,8 +9,8 @@ version="3.0">
   <servlet>
 		<servlet-name>lucille-serlvet</servlet-name>
 		<servlet-class>
-                     com.sun.jersey.spi.container.servlet.ServletContainer
-                </servlet-class>
+        	com.sun.jersey.spi.container.servlet.ServletContainer
+        </servlet-class>
 		<init-param>
 		     <param-name>com.sun.jersey.config.property.packages</param-name>
 		     <param-value>com.zinute.lucille</param-value>
