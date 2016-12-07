@@ -6,11 +6,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.zinute.lucille.data.db.SessionManager;
 import com.zinute.lucille.data.models.Profile;
+import com.zinute.lucille.data.models.TestTable;
 
 public class DbExperiments {
 
 	public static void main(String[] args) {
+		
+		insertTest();
+
+	}
+	
+	public static void insertTest(){
 		
 		SessionFactory sessionFactory = new Configuration().configure()
 				.buildSessionFactory();
@@ -27,7 +35,43 @@ public class DbExperiments {
 
 		session.getTransaction().commit();
 		session.close();
+		
+	}
+	
+	public static void insertTest1(){
+		
+		System.out.println("Maven + Hibernate Annotation + Postgres");
+		Session session = SessionManager.getSessionFactory().openSession();
 
+		session.beginTransaction();
+		
+		TestTable tt = new TestTable("test-entry-11", 2, new Date());
+
+		session.save(tt);
+		session.getTransaction().commit();
+		
+		session.close();
+		
+		System.out.println("Done");
+		
+	}
+
+	public static void insertTest2(){
+		
+		System.out.println("Maven + Hibernate Annotation + Postgres");
+		Session session = SessionManager.getSessionFactory().openSession();
+
+		session.beginTransaction();
+		
+		TestTable tt = new TestTable("test-entry-2", 2, new Date());
+		
+		session.save(tt);
+		session.getTransaction().commit();
+		
+		session.close();
+		
+		System.out.println("Done");
+		
 	}
 
 }
