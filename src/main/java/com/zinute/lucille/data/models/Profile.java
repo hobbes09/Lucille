@@ -116,52 +116,188 @@ public class Profile implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updated_at;
 
-	public Profile(String email, String title, String firstName, String lastName, String fullName,
-			String password, boolean hasAgreed, String memberType, String streetAddress, String state, String city,
-			Date dateOfBirth, String personalEmail, String bankState, String bankBranch, String bankIfsc,
-			String bankName, String bankCity, String bankAccountNumber, String bankAccountType, int landlineStdCode,
-			Long landlineContact, Long mobileContact, Long alternateMobileContact, Long zipCode, String otherComments,
-			boolean isStaff, boolean isActive, String referralCode, Date created_at, Date updated_at) {
-		super();
-		this.email = email;
-		this.title = title;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.fullName = fullName;
-		this.password = password;
-		this.hasAgreed = hasAgreed;
-		this.memberType = memberType;
-		this.streetAddress = streetAddress;
-		this.state = state;
-		this.city = city;
-		this.dateOfBirth = dateOfBirth;
-		this.personalEmail = personalEmail;
-		this.bankState = bankState;
-		this.bankBranch = bankBranch;
-		this.bankIfsc = bankIfsc;
-		this.bankName = bankName;
-		this.bankCity = bankCity;
-		this.bankAccountNumber = bankAccountNumber;
-		this.bankAccountType = bankAccountType;
-		this.landlineStdCode = landlineStdCode;
-		this.landlineContact = landlineContact;
-		this.mobileContact = mobileContact;
-		this.alternateMobileContact = alternateMobileContact;
-		this.zipCode = zipCode;
-		this.otherComments = otherComments;
-		this.isStaff = isStaff;
-		this.isActive = isActive;
-		this.referralCode = referralCode;
-		this.created_at = created_at;
-		this.updated_at = updated_at;
+	
+	// Builder
+	public static class Builder{
+		
+		// Required parameters
+		private final String email;
+		private final String title;
+		private final String firstName;
+		private final String lastName;
+		private final String fullName;
+		private final String password;
+		private final String memberType;
+		private final String streetAddress;
+		private final String state;
+		private final String city;
+		private final Date dateOfBirth;
+		private final String bankState;
+		private final Long mobileContact;
+		private final Long zipCode;
+		
+		
+		// Optional parameters
+		private boolean hasAgreed = false;
+		private String personalEmail = null;
+		private String bankBranch = null;
+		private String bankIfsc = null;
+		private String bankName = null;
+		private String bankCity = null;
+		private String bankAccountNumber = null;
+		private String bankAccountType = null;
+		private int landlineStdCode = -1;
+		private Long landlineContact = null;
+		private Long alternateMobileContact = -1L;
+		private String otherComments = null;
+		private boolean isStaff = false;
+		private boolean isActive = false;
+		private String referralCode = null;
+		private Date created_at = new Date();
+		private Date updated_at = new Date();
+		
+		public Profile build() {
+			return new Profile(this);
+		}
+		
+		public Builder(String email, String title, String firstName, String lastName, String fullName, String password,
+				String memberType, String streetAddress, String state, String city, Date dateOfBirth, String bankState,
+				Long mobileContact, Long zipCode) {
+			this.email = email;
+			this.title = title;
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.fullName = fullName;
+			this.password = password;
+			this.memberType = memberType;
+			this.streetAddress = streetAddress;
+			this.state = state;
+			this.city = city;
+			this.dateOfBirth = dateOfBirth;
+			this.bankState = bankState;
+			this.mobileContact = mobileContact;
+			this.zipCode = zipCode;
+		}
+
+		public Builder setHasAgreed(boolean hasAgreed) {
+			this.hasAgreed = hasAgreed;
+			return this;
+		}
+
+		public Builder setPersonalEmail(String personalEmail) {
+			this.personalEmail = personalEmail;
+			return this;
+		}
+
+		public Builder setBankBranch(String bankBranch) {
+			this.bankBranch = bankBranch;
+			return this;
+		}
+
+		public Builder setBankIfsc(String bankIfsc) {
+			this.bankIfsc = bankIfsc;
+			return this;
+		}
+
+		public Builder setBankName(String bankName) {
+			this.bankName = bankName;
+			return this;
+		}
+
+		public Builder setBankCity(String bankCity) {
+			this.bankCity = bankCity;
+			return this;
+		}
+
+		public Builder setBankAccountNumber(String bankAccountNumber) {
+			this.bankAccountNumber = bankAccountNumber;
+			return this;
+		}
+
+		public Builder setBankAccountType(String bankAccountType) {
+			this.bankAccountType = bankAccountType;
+			return this;
+		}
+
+		public Builder setLandlineStdCode(int landlineStdCode) {
+			this.landlineStdCode = landlineStdCode;
+			return this;
+		}
+
+		public Builder setLandlineContact(Long landlineContact) {
+			this.landlineContact = landlineContact;
+			return this;
+		}
+
+		public Builder setAlternateMobileContact(Long alternateMobileContact) {
+			this.alternateMobileContact = alternateMobileContact;
+			return this;
+		}
+
+		public Builder setOtherComments(String otherComments) {
+			this.otherComments = otherComments;
+			return this;
+		}
+
+		public Builder setStaff(boolean isStaff) {
+			this.isStaff = isStaff;
+			return this;
+		}
+
+		public Builder setActive(boolean isActive) {
+			this.isActive = isActive;
+			return this;
+		}
+
+		public Builder setReferralCode(String referralCode) {
+			this.referralCode = referralCode;
+			return this;
+		}
+
+		public Builder setCreated_at(Date created_at) {
+			this.created_at = created_at;
+			return this;
+		}
+
+		public Builder setUpdated_at(Date updated_at) {
+			this.updated_at = updated_at;
+			return this;
+		}
+		
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public Profile(Builder builder){
+		this.email = builder.email;
+		this.title = builder.title;
+		this.firstName = builder.firstName;
+		this.lastName = builder.lastName;
+		this.fullName = builder.fullName;
+		this.password = builder.password;
+		this.hasAgreed = builder.hasAgreed;
+		this.memberType = builder.memberType;
+		this.streetAddress = builder.streetAddress;
+		this.state = builder.state;
+		this.city = builder.city;
+		this.dateOfBirth = builder.dateOfBirth;
+		this.personalEmail = builder.personalEmail;
+		this.bankState = builder.bankState;
+		this.bankBranch = builder.bankBranch;
+		this.bankIfsc = builder.bankIfsc;
+		this.bankName = builder.bankName;
+		this.bankCity = builder.bankCity;
+		this.bankAccountNumber = builder.bankAccountNumber;
+		this.bankAccountType = builder.bankAccountType;
+		this.landlineStdCode = builder.landlineStdCode;
+		this.landlineContact = builder.landlineContact;
+		this.mobileContact = builder.mobileContact;
+		this.alternateMobileContact = builder.alternateMobileContact;
+		this.zipCode = builder.zipCode;
+		this.otherComments = builder.otherComments;
+		this.isStaff = builder.isStaff;
+		this.isActive = builder.isActive;
+		this.referralCode = builder.referralCode;
+		this.created_at = builder.created_at;
+		this.updated_at = builder.updated_at;
 	}
 
 	public String getEmail() {
@@ -411,7 +547,10 @@ public class Profile implements Serializable{
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}	
 	
 }
 
