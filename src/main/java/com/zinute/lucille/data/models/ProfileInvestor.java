@@ -41,17 +41,63 @@ public class ProfileInvestor {
 	@Column(name="nominee_dob", nullable=true, columnDefinition="date")
 	@Temporal(TemporalType.DATE)
 	private Date nomineeDob;
+	
+	
+	public static class Builder{
+		
+		// Required fields
+		private final Long profileId;
+		private final String pan;
+		
+		// Optional fields
+		private String nomineeFirstName = null;
+		private String nomineeLastName = null;
+		private String nomineeTitle = null;
+		private String nomineeRelation = null;
+		private Date nomineeDob = null;
+		
+		public Builder(Long profileId, String pan) {
+			super();
+			this.profileId = profileId;
+			this.pan = pan;
+		}
 
-	public ProfileInvestor(Long profileId, String pan, String nomineeFirstName, String nomineeLastName,
-			String nomineeTitle, String nomineeRelation, Date nomineeDob) {
-		super();
-		this.profileId = profileId;
-		this.pan = pan;
-		this.nomineeFirstName = nomineeFirstName;
-		this.nomineeLastName = nomineeLastName;
-		this.nomineeTitle = nomineeTitle;
-		this.nomineeRelation = nomineeRelation;
-		this.nomineeDob = nomineeDob;
+		public Builder setNomineeFirstName(String nomineeFirstName) {
+			this.nomineeFirstName = nomineeFirstName;
+			return this;
+		}
+
+		public Builder setNomineeLastName(String nomineeLastName) {
+			this.nomineeLastName = nomineeLastName;
+			return this;
+		}
+
+		public Builder setNomineeTitle(String nomineeTitle) {
+			this.nomineeTitle = nomineeTitle;
+			return this;
+		}
+
+		public Builder setNomineeRelation(String nomineeRelation) {
+			this.nomineeRelation = nomineeRelation;
+			return this;
+		}
+
+		public Builder setNomineeDob(Date nomineeDob) {
+			this.nomineeDob = nomineeDob;
+			return this;
+		}
+		
+	}
+	
+
+	public ProfileInvestor(Builder builder) {
+		this.profileId = builder.profileId;
+		this.pan = builder.pan;
+		this.nomineeFirstName = builder.nomineeFirstName;
+		this.nomineeLastName = builder.nomineeLastName;
+		this.nomineeTitle = builder.nomineeTitle;
+		this.nomineeRelation = builder.nomineeRelation;
+		this.nomineeDob = builder.nomineeDob;
 	}
 
 	public Long getId() {
